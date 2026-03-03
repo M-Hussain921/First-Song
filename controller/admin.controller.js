@@ -51,3 +51,32 @@ export const restoreUser = async (req, res) => {
         res.status(404).json({ message: err.message })
     }
 };
+
+export const viewAllArtists=async(req,res)=>{
+    try{
+        const user=await users.find({role:"artist"}).select("-password").populate("songs");
+        res.status(200).json(user);
+    } catch (err){
+        res.status(400).json({message:err.message})
+    }
+};
+
+export const deletedArtists=async(req,res)=>{
+    try{
+        const deleted=await users.find({role:"artist",isDelete:true}).select("-password").populate("songs");
+        if(deleted.length===0) return res.status(200).json({message: "No deleted artist found"}) ;
+        res.status(200).json({messsage:"Deleted artist fatch successfull",deleted});
+    } catch (err){
+        res.status(400).json({message:err.message});
+    };
+};
+
+export const allDeletedUsers=async(req,res)=>{
+    try{
+        const deletedUsers=await users.find({isDelete:true}).select("-password").populate("songs");
+        if(deletedUsers.length===0) return res.status(200).json({message:"No deleted users found"});
+        res.status(200).json({message:"Deleted users fatch successfully",deletedUsers});
+    } catch(err){
+        res.status(400).json({message:err.message});
+    }
+};

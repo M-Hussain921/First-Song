@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const userschema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: { type: String },
     email: {
         type: String,
@@ -26,6 +26,15 @@ const userschema = new mongoose.Schema({
          type: Date,
         default: null
     }
-}, { timestamps: true });
+}, { timestamps: true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true},
+ });
 
-export default  mongoose.model("users", userschema);
+userSchema.virtual("songs",{
+    ref:"Song",
+    localField:"_id",
+    foreignField:"artist"
+});
+
+export default  mongoose.model("users", userSchema);
