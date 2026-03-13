@@ -1,4 +1,4 @@
-import Song from "../models/song.js";
+import Song from "../models/song.models.js";
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
 

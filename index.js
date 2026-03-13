@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import auth from "./router/auth.router.js";
 import admin  from "./router/admin.router.js";
 import artist from "./router/artist.router.js";
+import user from "./router/user.router.js";
 
 import "./config/cloudinary.js";
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/auth", auth);
 app.use("/admin", admin);
 app.use("/artist", artist);
+app.use("/user",user);
 
 mongoose
   .connect(process.env.MONGO_URL)

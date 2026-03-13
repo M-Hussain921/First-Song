@@ -1,4 +1,4 @@
-import users from '../models/user.js';
+import users from '../models/user.models.js';
 
 export const getalluser = async (req, res) => {
     try {
@@ -79,4 +79,4 @@ export const allDeletedUsers=async(req,res)=>{
     } catch(err){
         res.status(400).json({message:err.message});
     }
-};
+}; 
